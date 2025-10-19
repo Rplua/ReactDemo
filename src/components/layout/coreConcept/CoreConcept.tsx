@@ -3,13 +3,13 @@ import './CoreConcept.scss'
 type CoreConcept = {
     title: string,
     description: string,
-    img: string
+    image: string
 }
 
 function CoreConcept(props: CoreConcept){
     return(
         <li>
-            <img src={props.img} alt={props.title} />
+            <img src={props.image} alt={props.title} />
             <h3>{props.title}</h3>
             <p>{props.description}</p>
         </li>

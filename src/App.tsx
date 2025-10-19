@@ -35,13 +35,9 @@ function App() {
         <section id="core-concepts">
           <h2>Core Concepts</h2>
           <ul>
-            {CORE_CONCEPTS.map((concept) => (
-              <CoreConcept
-                key={concept.title}
-                title={concept.title}
-                description={concept.description}
-                img={concept.image}
-              />))}
+            {CORE_CONCEPTS.map((conceptItem) => (
+              <CoreConcept key={conceptItem.title}{...conceptItem}/>
+              ))}
           </ul>
         </section>
         <section id="examples">
@@ -49,6 +45,7 @@ function App() {
           <menu>
             {BUTTON_NAME.map((btn) => (
               <TabButton
+                isSelected={selecedTopic === btn.name}
                 key={btn.name}
                 onSelect={() => handleSelected(btn.name)}>
                 {btn.name}
