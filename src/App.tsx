@@ -2,13 +2,18 @@ import Header from "@components/layout/header/Header";
 import CoreConcept from "@components/layout/coreConcept/CoreConcept";
 import TabButton from "@components/layout/TabButton/TabButton";
 
+import { useState } from "react";
 import { CORE_CONCEPTS } from "./utils/data";
 import { BUTTON_NAME } from "./utils/data";
+import { EXAMPLES} from "./utils/data";
+import type { ExampleKey } from "./utils/data";
 
 function App() {
 
-  const handleSelected = (selectedButton: string) => {
-    console.log(selectedButton)
+  const [selecedTopic, setSelectedTopic] = useState<ExampleKey>('components');
+
+  const handleSelected = (selectedButton: ExampleKey) => {
+    setSelectedTopic(selectedButton)
   }
   return (
     <div>
@@ -37,7 +42,15 @@ function App() {
               </TabButton>
             ))}
           </menu>
-          
+            <div id="tab-content">
+              <h3>{EXAMPLES[selecedTopic].title}</h3>
+              <p>{EXAMPLES[selecedTopic].description}</p>
+              <pre>
+                <code>
+                  {EXAMPLES[selecedTopic].code}
+                </code>
+              </pre>
+            </div>
         </section>
       </main>
     </div>
