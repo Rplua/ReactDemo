@@ -5,15 +5,28 @@ import TabButton from "@components/layout/TabButton/TabButton";
 import { useState } from "react";
 import { CORE_CONCEPTS } from "./utils/data";
 import { BUTTON_NAME } from "./utils/data";
-import { EXAMPLES} from "./utils/data";
+import { EXAMPLES } from "./utils/data";
 import type { ExampleKey } from "./utils/data";
 
 function App() {
 
-  const [selecedTopic, setSelectedTopic] = useState<ExampleKey>('components');
+  const [selecedTopic, setSelectedTopic] = useState<ExampleKey | null>(null);
 
   const handleSelected = (selectedButton: ExampleKey) => {
     setSelectedTopic(selectedButton)
+  }
+
+  let tabContent = <p>Please a topic.</p>;
+  if (selecedTopic) {
+    tabContent = <div id = "tab-content" >
+              <h3>{EXAMPLES[selecedTopic].title}</h3>
+              <p>{EXAMPLES[selecedTopic].description}</p>
+              <pre>
+                <code>
+                  {EXAMPLES[selecedTopic].code}
+                </code>
+              </pre>
+            </div >
   }
   return (
     <div>
@@ -22,7 +35,7 @@ function App() {
         <section id="core-concepts">
           <h2>Core Concepts</h2>
           <ul>
-            {CORE_CONCEPTS.map((concept) =>(
+            {CORE_CONCEPTS.map((concept) => (
               <CoreConcept
                 key={concept.title}
                 title={concept.title}
@@ -42,15 +55,7 @@ function App() {
               </TabButton>
             ))}
           </menu>
-            <div id="tab-content">
-              <h3>{EXAMPLES[selecedTopic].title}</h3>
-              <p>{EXAMPLES[selecedTopic].description}</p>
-              <pre>
-                <code>
-                  {EXAMPLES[selecedTopic].code}
-                </code>
-              </pre>
-            </div>
+            {tabContent}
         </section>
       </main>
     </div>
