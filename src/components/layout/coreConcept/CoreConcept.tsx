@@ -1,3 +1,5 @@
+import './CoreConcept.scss'
+
 type CoreConcept = {
     title: string,
     description: string,
